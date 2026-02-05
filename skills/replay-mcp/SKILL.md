@@ -78,14 +78,12 @@ This is useful to understand why particular events happened or didn't happen.
 
 * GetStack: Show the on stack frames at a point.
 * ControlDependency: Describe the events in a recording that triggered execution of a point.
-* ReactClickResponse: Describe how the app reacted to a click event.
-* ReactEnclosingEffect: Describe any effect responsible for adding a DOM element.
 
 ## Details
 
 Detail tools show additional details about the app's state at particular points.
 
-* DescribePoint: Describe the function a point executes in, what code in the function executed, values of all variables.
+* DescribePoint: Describe a point's location and variable values.
 * InspectElement: Describe a DOM element's details.
 * ReactComponents: Describe the React component tree at a point.
 * Logpoint: Show the points and values of an expression every time a statement executed.
