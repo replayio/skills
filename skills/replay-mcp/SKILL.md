@@ -55,13 +55,8 @@ Timeline tools describe sequences of events for what happened across the recordi
 ## Sources
 
 Source tools get information about the JS sources in the app and what code executed.
-When showing source code in these and other tools, each line is annotated with whether and
-how often it executed. For example:
-
-102 X10: // Line 102 has a breakpoint that executed 10 times
-103 NX:  // Line 103 has a breakpoint but was never executed
-104:     // Line 104 has no breakpoints
-105 *:   // Line 105 highlighted for some other reason by the tool
+When showing source code in these and other tools, hit counts are shown for each line.
+A blank value is used for lines that have no breakpoints.
 
 * ListSources: Find source files by name.
 * ReadSource: Read the contents of a source and show what code executed.
