@@ -28,82 +28,97 @@ bun i -g replayio
 
 ### Authentication
 
-Navigate to https://app.replay.io settings page, create your API key and save the API key in the environment variable `REPLAY_API_KEY`. 
-
-
+Navigate to https://app.replay.io settings page, create your API key and save the API key in the environment variable `REPLAY_API_KEY`.
 
 ### Available Commands
 
-| Command | Arguments | Options |
-|---------|-----------|---------|
-| `info` | – | – |
-| `list` | – | `--json` |
-| `login` | – | – |
-| `logout` | – | – |
-| `record` | `[url]` | – |
-| `remove` | `[ids...]` | `-a`, `--all` |
-| `update` | – | – |
-| `upload` | `[ids...]` | – |
+| Command              | Arguments    | Options                                                           |
+| -------------------- | ------------ | ----------------------------------------------------------------- |
+| `info`               | –            | –                                                                 |
+| `list`               | –            | `--json`                                                          |
+| `login`              | –            | –                                                                 |
+| `logout`             | –            | –                                                                 |
+| `record`             | `[url]`      | –                                                                 |
+| `remove`             | `[ids...]`   | `-a`, `--all`                                                     |
+| `update`             | –            | –                                                                 |
+| `upload`             | `[ids...]`   | –                                                                 |
 | `upload-source-maps` | `<paths...>` | `-g`, `--group`, `-x`, `--extensions`, `-i`, `--ignore`, `--root` |
-| `help` | – | – |
+| `help`               | –            | –                                                                 |
 
 Pass `-h` or `--help` to any command for more info.
 
 ### Command Details
 
 #### `replayio info`
+
 Displays information about installed Replay dependencies including CLI version and Replay Browser info.
 
 #### `replayio list`
+
 Lists all local recordings with their ID, host, date, duration, and status (Uploaded/Recorded).
+
 - `--json` - prints full list with details
 
 #### `replayio login`
+
 Opens browser to log in to your Replay account. Creates account if needed.
 
 #### `replayio logout`
+
 Logs out from Replay account. Does NOT invalidate API keys in environment variables.
 
 #### `replayio record [url]`
+
 Launches Replay Browser and starts recording. Default URL is `about:blank`.
+
 - Recording continues until stopped in terminal
 - Prompts to upload after recording
 - Automatically checks for browser/CLI updates
 
 #### `replayio remove [ids...]`
+
 Removes one or more recordings.
+
 - Without arguments: opens interactive menu to select recordings
 - With IDs: removes specified recordings
 - `-a`, `--all` - removes all local recordings
 
 #### `replayio update`
+
 Updates the Replay Browser only. CLI updates are done via npm/yarn/pnpm/bun.
 
 #### `replayio upload [ids...]`
+
 Uploads one or more recordings.
+
 - Without arguments: opens interactive menu to select recordings
 - With IDs: uploads specified recordings
 - Returns URL to view recording after upload
 
 #### `replayio upload-source-maps <paths...>`
+
 Uploads source maps for a Workspace.
+
 - `-g`, `--group <name>` - group name (e.g., commit SHA or release version)
 - `-x`, `--extensions <exts>` - file extensions to process (default: ".js,.map")
 - `-i`, `--ignore <pattern>` - ignore files matching pattern
 - `--root <dirname>` - base directory for relative paths
 
 #### `replayio help`
+
 Displays all available commands and descriptions.
 
 ## Core Workflow
 
 **Record and upload a session:**
+
 ```sh
 replayio record https://myapp.com
 # After recording, you'll be prompted to upload
 ```
 
 **Upload a specific recording:**
+
 ```sh
 replayio list  # Find the recording ID
 replayio upload <recording-id>
@@ -111,19 +126,17 @@ replayio upload <recording-id>
 
 **Run Replay MCP Server to debug your recored application**
 to install the MCP server in Claude, run the following command:
+
 ```
-claude --mcp-config "$(cat <<EOF
-  {
+claude --mcp-config "{
     "mcpServers": {
       "replay": {
         "type": "http",
-        "url": "https://dispatch.replay.io/nut/recording/<recording-id>/mcp",
+        "url": "https://dispatch.replay.io/nut/mcp",
         "headers": {
-          "Authorization": "${API_KEY}"
+          "Authorization": "${REPLAY_API_KEY}"
         }
       }
     }
-  }
-  EOF
-)"
+  }"
 ```
