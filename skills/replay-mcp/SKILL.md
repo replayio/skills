@@ -1,3 +1,8 @@
+---
+name: replay-mcp
+description: Use Replay MCP to inspect the contents of https://replay.io recordings.
+---
+
 # Overview
 
 This document provides an overview of the tools available when using Replay MCP
