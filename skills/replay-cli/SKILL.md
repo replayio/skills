@@ -1,7 +1,7 @@
 ---
 name: replay-cli
 description: Record your application to gather performance data and debug issues. It enables users to install Replay ClI, record a session, upload and manage them.
-allowed-tools: Bash(replayio:*)
+allowed-tools: Bash(replayio:*), mcp__replay
 ---
 
 ## replay-cli

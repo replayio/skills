@@ -1,6 +1,7 @@
 ---
 name: replay-mcp
 description: Use Replay MCP to inspect the contents of https://replay.io recordings.
+allowed-tools: Bash(replayio:*), mcp__replay
 ---
 
 # Overview
