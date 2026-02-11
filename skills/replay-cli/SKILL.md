@@ -69,10 +69,10 @@ Logs out from Replay account. Does NOT invalidate API keys in environment variab
 
 #### `replayio record [url]`
 
-Launches Replay Browser and starts recording. Default URL is `about:blank`.
+Launches Replay Browser and starts recording the given URL. Default URL is `about:blank`.
 
-- Recording continues until stopped in terminal
-- Prompts to upload after recording
+- Recording continues until browser is closed
+- If not prompted differently, agent should upload just the main URL
 - Automatically checks for browser/CLI updates
 
 #### `replayio remove [ids...]`
@@ -118,9 +118,9 @@ replayio record https://myapp.com
 ```
 
 **Upload a specific recording:**
+If upload wasn’t done automatically after recording, agent should upload the recording manually using the recording ID from previous step
 
 ```sh
-replayio list  # Find the recording ID
 replayio upload <recording-id>
 ```
 
