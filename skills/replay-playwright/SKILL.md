@@ -131,31 +131,3 @@ RECORD_ALL_CONTENT=1 $(node -e "console.log(require('os').homedir() + '/.replay/
 ```
 
 If the recording driver loads correctly, you should see no `DoLoadDriverHandle` errors. There should be recordings available from `replayio list`
-
-### Fix: Missing libcrypto.so.1.1
-
-If you see:
-```
-DoLoadDriverHandle: dlopen failed ... libcrypto.so.1.1: cannot open shared object file
-```
-
-The Replay recording driver requires OpenSSL 1.1, but the system only has OpenSSL 3.
-Download the Ubuntu 18.04 `libssl1.1` package and extract the libraries:
-
-```sh
-curl -sL -o /tmp/libssl1.1.deb \
-  http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1-1ubuntu2.1~18.04.23_amd64.deb
-dpkg-deb -x /tmp/libssl1.1.deb $HOME/.local/openssl11
-rm /tmp/libssl1.1.deb
-```
-
-Then set `LD_LIBRARY_PATH` before launching the browser:
-
-```sh
-export LD_LIBRARY_PATH=$HOME/.local/openssl11/usr/lib/x86_64-linux-gnu
-```
-
-Verify the fix by running the diagnostic command again — the `DoLoadDriverHandle` error should be gone.
-
-This should be set in `launchOptions.env` in your Playwright config, or globally via the Dockerfile.
-```
